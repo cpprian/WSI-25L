@@ -27,7 +27,9 @@ if __name__ == "__main__":
             zorder=2,
         )
         ax.scatter(start[0], start[1], color="green", label="Start point", zorder=3)
-        ax.scatter(path[-1, 0], path[-1, 1], color="yellow", label="End point", zorder=4)
+        ax.scatter(
+            path[-1, 0], path[-1, 1], color="yellow", label="End point", zorder=4
+        )
         ax.set_title(f"Gradient Descent [Himmelblau] with beta={b}")
         ax.legend()
         plt.savefig(f"img/himmelblau_beta_{b}.png")

@@ -21,6 +21,7 @@ def gradient_rastrigin(x: int) -> int:
     x = np.array(x)
     return 2 * x + 20 * np.pi * np.sin(2 * np.pi * x)
 
+
 def stop(gradient: callable, path: np.ndarray, epsilon: float, beta: float) -> bool:
     grad_norm = np.linalg.norm(gradient(path[-1]))
     next_step = beta * grad_norm
