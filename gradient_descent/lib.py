@@ -21,9 +21,10 @@ def gradient_rastrigin(x: int) -> int:
     x = np.array(x)
     return 2 * x + 20 * np.pi * np.sin(2 * np.pi * x)
 
-
-def stop(gradient: callable, path: np.ndarray, epsilon: float) -> bool:
-    return np.linalg.norm(gradient(path[-1])) < epsilon
+def stop(gradient: callable, path: np.ndarray, epsilon: float, beta: float) -> bool:
+    grad_norm = np.linalg.norm(gradient(path[-1]))
+    next_step = beta * grad_norm
+    return grad_norm < epsilon or next_step < epsilon
 
 
 def gradient_descent(
@@ -35,7 +36,7 @@ def gradient_descent(
         grad = gradient(current)
         next_point = current - beta * grad
         path.append(next_point)
-        if stop(gradient, path, epsilon):
+        if stop(gradient, path, epsilon, beta):
             print(f"Stopped at {next_point}")
             break
         current = next_point
